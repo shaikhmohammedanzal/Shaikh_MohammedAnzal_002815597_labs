@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import model.Feature;
 import model.FeatureCatalog;
+import model.Supplier;
 
 /**
  *
@@ -22,14 +23,16 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     JPanel workArea;
     Product product;
+    Supplier supplier;
 
     /**
      * Creates new form CreateProductJPanel
      */
-    public ViewProductDetailJPanel(JPanel workArea, Product product) {
+    public ViewProductDetailJPanel(JPanel workArea, Product product,Supplier supplier) {
         initComponents();
         this.workArea = workArea;
         this.product = product;
+        this.supplier =  supplier;
 
         txtName.setText(this.product.getName());
         txtId.setText(String.valueOf(this.product.getId()));
@@ -241,13 +244,19 @@ public class ViewProductDetailJPanel extends javax.swing.JPanel {
 
     private void backAction() {
 
-        workArea.remove(this);
-        Component[] componentArray = workArea.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        ManageProductCatalogJPanel manageProductCatalogJPanel = (ManageProductCatalogJPanel) component;
-        manageProductCatalogJPanel.refreshTable();
+//        workArea.remove(this);
+//        Component[] componentArray = workArea.getComponents();
+//        Component component = componentArray[componentArray.length - 1];
+//        ManageProductCatalogJPanel manageProductCatalogJPanel = (ManageProductCatalogJPanel) component;
+//        manageProductCatalogJPanel.refreshTable();
+ManageProductCatalogJPanel panel = new ManageProductCatalogJPanel(workArea, supplier);
+workArea.add("ManageProductCatalogJPanel", panel);
         CardLayout layout = (CardLayout) workArea.getLayout();
-        layout.previous(workArea);
+        layout.next(workArea);
+
+
+//        CardLayout layout = (CardLayout) workArea.getLayout();
+//        layout.previous(workArea);
     }
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
